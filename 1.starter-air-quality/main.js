@@ -46,7 +46,10 @@ const pollutionScale = [
       const response = await fetch("http://api.airvisual.com/v2/nearest_city?key=73eb6caa-a8da-4730-8fc7-3b302bc2188d").catch(error => {
         throw new Error(error);
       });
-      //73eb6caa-a8da-4730-8fc7-3b302bc2188d
+      
+      if(!response.ok){
+        throw new Error("Error ${response.status}, ${response.statusText}");
+      }
   
       const responseData = await response.json();
       const aqi = responseData.data.current.pollution.aqius;
